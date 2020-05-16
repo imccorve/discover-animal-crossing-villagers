@@ -54,7 +54,7 @@ func formResponse(params map[string]string) events.APIGatewayProxyResponse {
 	// response := APIGatewayProxyResponse{Headers: make(map[string]string)}
 
 	// Call Nookipedia API
-	url := "https://nookipedia.com/w/api.php?action=parse&section=2&origin=*&prop=text&page=List_of_villagers&format=json"
+	url := "https://nookipedia.com/w/api.php?action=parse&section=3&origin=*&prop=text&page=List_of_villagers&format=json"
 	HTMLString, err := extractPageHTML(url)
 	if err != nil {
 		return get403Response(err)
