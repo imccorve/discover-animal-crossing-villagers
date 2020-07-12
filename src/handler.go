@@ -10,7 +10,7 @@ import (
 )
 
 func extractPageHTML(url string) (string, error) {
-	timeout := time.Duration(10 * time.Second)
+	timeout := time.Duration(15 * time.Second)
 	client := http.Client{
 		Timeout: timeout,
 	}
@@ -97,11 +97,16 @@ func Handler(params events.APIGatewayProxyRequest) (events.APIGatewayProxyRespon
 	return response, nil
 }
 
+// TEST ////
 // func main() {
-// Handler("https://nookipedia.com/w/api.php?action=parse&page=List_of_villagers&format=json")
-// fmt.Println(Handler(
-// 	"https://nookipedia.com/w/api.php?action=parse&section=2&origin=*&prop=text&page=List_of_villagers&format=json")) // Error with client making request
+// 	var m map[string]string
+// 	m = make(map[string]string)
+// 	m["Species"] = "Bird"
+// 	response := formResponse(m)
+// 	fmt.Println(response.Body)
 
+// Handler("https://nookipedia.com/w/api.php?action=parse&page=List_of_villagers&format=json")
+// fmt.Println(Handler("https://nookipedia.com/w/api.php?action=parse&section=2&origin=*&prop=text&page=List_of_villagers&format=json")) // Error with client making request
 // fmt.Println(Handler("https://nookipedia.com/w/api.php?action=parse&section=2&origin=*&page=List_of_villagers&format=json")) // Error with client making request
 // Handler("https://en.wikipedia.org/w/api.php?action=query&origin=*&list=search&srsearch=Craig%20Noone&format=jsonfm")
 // Handler("https://jsonplaceholder.typicode.com/todos/1")

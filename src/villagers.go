@@ -56,7 +56,7 @@ func convertToVillagers(HTMLString string) ([]Villager, error) {
 	for i := 2; i < len(rows); i++ {
 		if len(rows[i]) > 5 {
 			emptyVillager := Villager{
-				"https://nookipedia.com" + string(rows[i][0]),
+				string(rows[i][0]),
 				string(rows[i][1]),
 				string(rows[i][2]),
 				string(rows[i][3]),
