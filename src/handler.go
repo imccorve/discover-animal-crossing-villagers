@@ -36,7 +36,7 @@ func extractPageHTML(url string) (string, error) {
 		return "", err
 	}
 
-	// Assumes that JSON is not malformed etc.
+	// Assumes that Nookipedia JSON is not malformed etc.
 	HTMLString := result["parse"].(map[string]interface{})["text"].(map[string]interface{})["*"].(string)
 
 	return HTMLString, nil
@@ -56,6 +56,7 @@ func formResponse(params map[string]string) events.APIGatewayProxyResponse {
 	// Call Nookipedia API
 	url := "https://nookipedia.com/w/api.php?action=parse&section=3&origin=*&prop=text&page=List_of_villagers&format=json"
 	HTMLString, err := extractPageHTML(url)
+	println(HTMLString)
 	if err != nil {
 		return get403Response(err)
 	}
@@ -64,17 +65,8 @@ func formResponse(params map[string]string) events.APIGatewayProxyResponse {
 	if err != nil {
 		return get403Response(err)
 	}
-
-	// Filter
-	if params["Species"] != "" {
-		var filteredVillagers []Villager
-		species := params["Species"]
-		for _, villager := range villagers {
-			if villager.Species == species {
-				filteredVillagers = append(filteredVillagers, villager)
-			}
-		}
-		villagers = filteredVillagers
+	if len(params) > 0 {
+		villagers = filterVillagers(villagers, params)
 	}
 
 	villagersBytes, err := json.Marshal(villagers)
