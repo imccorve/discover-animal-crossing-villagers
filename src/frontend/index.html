@@ -8,11 +8,102 @@
         <h1 style="margin-bottom: 1rem"> Animal Crossing: Villagers Compendium </h1>
         <h4 style="margin-bottom: 1rem" > An updated list of characters available as villagers in the Animal Crossing games by Nintendo. This list uses data from the <a href="https://nookipedia.com/wiki/Nookipedia:Development"> Nookipedia API</a>.</h4>
         <!-- <button type="button" class="btn btn-info btn-lg" style="margin-bottom: 1rem;" onclick="resetSpecies();"> Show All Villagers</button> -->
+        <div> Filter Section 
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Personality
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Lazy</a>
+                    <a class="dropdown-item" href="#">Normal</a>
+                    <a class="dropdown-item" href="#">Peppy</a>
+                    <a class="dropdown-item" href="#">Smug</a>
+                    <a class="dropdown-item" href="#">Sisterly</a>
+                    <a class="dropdown-item" href="#">Snooty</a>
+                    <a class="dropdown-item" href="#">Cranky</a>
+                    <a class="dropdown-item" href="#">Jock</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Gender
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Female</a>
+                    <a class="dropdown-item" href="#">Male</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Species
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div class="row" style="width: 400px;">
+                        <ul class="list-unstyled col-md-4">
+
+                            <a class="dropdown-item" href="#">Alligator</a>
+                            <a class="dropdown-item" href="#">Anteater</a>
+                            <a class="dropdown-item" href="#">Bear</a>
+                            <a class="dropdown-item" href="#">Bird</a>
+                            <a class="dropdown-item" href="#">Bull</a>
+                            <a class="dropdown-item" href="#">Cat</a>
+                            <a class="dropdown-item" href="#">Chicken</a>
+                        </ul>
+                        <ul class="list-unstyled col-md-4">
+
+                            <a class="dropdown-item" href="#">Cow</a>
+                            <a class="dropdown-item" href="#">Cub</a>
+                            <a class="dropdown-item" href="#">Deer</a>
+                            <a class="dropdown-item" href="#">Dog</a>
+                            <a class="dropdown-item" href="#">Duck</a>
+                            <a class="dropdown-item" href="#">Eagle</a>
+                            <a class="dropdown-item" href="#">Elephant</a>
+                        </ul>
+                        <ul class="list-unstyled col-md-4">
+                            <a class="dropdown-item" href="#">Frog</a>
+                            <a class="dropdown-item" href="#">Goat</a>
+                            <a class="dropdown-item" href="#">Gorilla</a>
+                            <a class="dropdown-item" href="#">Hamster</a>
+                            <a class="dropdown-item" href="#">Hippo</a>
+                            <a class="dropdown-item" href="#">Horse</a>
+                            <a class="dropdown-item" href="#">Kangaroo</a>
+
+                        </ul>
+                        <ul class="list-unstyled col-md-4">
+                            
+                            <a class="dropdown-item" href="#">Koala</a>
+                            <a class="dropdown-item" href="#">Lion</a>
+                            <a class="dropdown-item" href="#">Monkey</a>
+                            <a class="dropdown-item" href="#">Mouse</a>
+                            <a class="dropdown-item" href="#">Octopus</a>
+                            <a class="dropdown-item" href="#">Ostrich</a>
+                            <a class="dropdown-item" href="#">Penguin</a>
+                        </ul>
+                        <ul class="list-unstyled col-md-4">
+                            <a class="dropdown-item" href="#">Pig</a>
+                            <a class="dropdown-item" href="#">Rabbit</a>
+                            <a class="dropdown-item" href="#">Rhino</a>
+                            <a class="dropdown-item" href="#">Sheep</a>
+                            <a class="dropdown-item" href="#">Squirrel</a>
+                            <a class="dropdown-item" href="#">Tiger</a>
+                            <a class="dropdown-item" href="#">Wolf</a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+                <!-- <div id="myBtnContainer">
+                    <button class="btn active" onclick="filterSelection('all')"> Show all</button>
+                    <button class="btn btn-outline-primary" onclick="filterSelection('cars')"> Cars</button>
+                    <button class="btn btn-outline-primary" onclick="filterSelection('animals')"> Animals</button>
+                    <button class="btn btn-outline-primary" onclick="filterSelection('fruits')"> Fruits</button>
+                    <button class="btn btn-outline-primary" onclick="filterSelection('colors')"> Colors</button>
+                  </div> -->
+        </div>
         <div class="input-group mb-3" style="margin-bottom: 1rem;">
-            <input type="text" class="form-control" placeholder="Filter by species" aria-label="Filter by species" aria-describedby="button-addon" id="userInput">
+            <!-- <input type="text" class="form-control" placeholder="Filter by species" aria-label="Filter by species" aria-describedby="button-addon" id="userInput">
             <div class="input-group-append">
               <button class="btn btn-outline-secondary" type="button" id="button-addon" onclick="filter();" >Filter</button>
-            </div>
+            </div> -->
           </div>
           <div id="content-container">
             <div id="renderList" class="table-responsive">
@@ -76,7 +167,9 @@
             species = ""
             sendRequest(requestOptions)
         }
-        
         </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
