@@ -31,11 +31,8 @@ jobs:
         fi
 
     - name: Build
-      run: go build -v ./src/.
+      run: go build -v ./src/main.go ./src/handler.go ./src/villagers.go
 
     - name: Test
-      run: go test -v ./src/.
-
-    - name: Run golangci-lint
-      uses: golangci/golangci-lint-action@v1.2.1
+      run: go test -v ./src/*.go
 
