@@ -8,4 +8,4 @@ Serverless Golang API uses AWS Lambda function connected to an API Gateway. The 
 The goquery library is used for retrieving information from the tables on the wiki page. Keep in mind that changes to the structure of the Animal Crossing wiki page could happen at anytime, resulting in the program ending with issues and/or an error. The villager information is available in the raw format in the test_input folder.
 
 https://github.com/PuerkitoBio/goquery
-![alt-text](./preview_gif.gif)
+![Screenshot of webpage with a list of animal crossing characters who are both of personality lazy and of species bird.](./preview_animal_crossing.png)
