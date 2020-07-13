@@ -7,31 +7,148 @@
     <body style="padding: 2rem">
         <h1 style="margin-bottom: 1rem"> Animal Crossing: Villagers Compendium </h1>
         <h4 style="margin-bottom: 1rem" > An updated list of characters available as villagers in the Animal Crossing games by Nintendo. This list uses data from the <a href="https://nookipedia.com/wiki/Nookipedia:Development"> Nookipedia API</a>.</h4>
-        <!-- <button type="button" class="btn btn-info btn-lg" style="margin-bottom: 1rem;" onclick="resetSpecies();"> Show All Villagers</button> -->
-        <div class="input-group mb-3" style="margin-bottom: 1rem;">
-            <input type="text" class="form-control" placeholder="Filter by species" aria-label="Filter by species" aria-describedby="button-addon" id="userInput">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="button-addon" onclick="filter();" >Filter</button>
+        <button type="button" class="btn btn-info btn-lg" style="margin-bottom: 1rem;" onclick="showAll();"> Show All Villagers</button>
+        <div> 
+            <div class="container" style="margin-left: unset;">
+                <div class="row">
+
+                    <div class="dropdown" style="margin-right: 1rem;">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonPersonality" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Personality
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonPersonality">
+                            <a class="dropdown-item" onclick="filterPersonality(this.textContent);">Lazy</a>
+                            <a class="dropdown-item" href="#" onclick="filterPersonality(this.textContent);">Normal</a>
+                            <a class="dropdown-item" href="#" onclick="filterPersonality(this.textContent);">Peppy</a>
+                            <a class="dropdown-item" href="#" onclick="filterPersonality(this.textContent);">Smug</a>
+                            <a class="dropdown-item" href="#" onclick="filterPersonality(this.textContent);">Sisterly (Uchi)</a>
+                            <a class="dropdown-item" href="#" onclick="filterPersonality(this.textContent);">Snooty</a>
+                            <a class="dropdown-item" href="#" onclick="filterPersonality(this.textContent);">Cranky</a>
+                            <a class="dropdown-item" href="#" onclick="filterPersonality(this.textContent);">Jock</a>
+                        </div>
+                    </div>
+                    <div class="dropdown" style="margin-right: 1rem;">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonGender" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Gender
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonGender">
+                            <a class="dropdown-item" href="#" onclick="filterGender(this.textContent);">Female</a>
+                            <a class="dropdown-item" href="#" onclick="filterGender(this.textContent);">Male</a>
+                        </div>
+                    </div>
+                    <div class="dropdown" style="margin-right: 1rem;">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButtonSpecies" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Species
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonSpecies">
+                            <div class="row" style="width: 400px;">
+                                <ul class="list-unstyled col-md-4">
+        
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Alligator</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Anteater</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Bear</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Bird</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Bull</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Cat</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Chicken</a>
+                                </ul>
+                                <ul class="list-unstyled col-md-4">
+        
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Cow</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Cub</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Deer</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Dog</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Duck</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Eagle</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Elephant</a>
+                                </ul>
+                                <ul class="list-unstyled col-md-4">
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Frog</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Goat</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Gorilla</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Hamster</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Hippo</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Horse</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Kangaroo</a>
+        
+                                </ul>
+                                <ul class="list-unstyled col-md-4">
+                                    
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Koala</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Lion</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Monkey</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Mouse</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Octopus</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Ostrich</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Penguin</a>
+                                </ul>
+                                <ul class="list-unstyled col-md-4">
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Pig</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Rabbit</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Rhino</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Sheep</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Squirrel</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Tiger</a>
+                                    <a class="dropdown-item" href="#" onclick="filterSpecies(this.textContent);">Wolf</a>
+                                </ul>
+                            </div>
+                        </div>
+                </div>
+                </div>
             </div>
+        </div>
+        <div class="input-group mb-3" style="margin-bottom: 1rem;">
           </div>
           <div id="content-container">
             <div id="renderList" class="table-responsive">
             </div>
           </div>
         <script type="text/javascript">
-        var species = ""
         var header = '<thead><tr><th scope="col">Villager Image</th><th scope="col">English Name</th><th scope="col">Japanese Name</th><th scope="col">Species</th><th scope="col">Gender</th><th scope="col">Personality</th></tr></thead>'
-        
+        var requestParams = {
+            personality: { param: "Personality=",value: ""},
+            species: { param: "Species=",value: ""},
+            gender: { param: "Gender=",value: ""},
+        }
         var requestOptions = {
             method: 'GET',
             redirect: 'follow',
             timeout: 25
         };
+        function constructAPIURL() {
+            api = "https://8nnamf5t5f.execute-api.us-east-2.amazonaws.com/default/villagers?"
+            personality = requestParams.personality
+            species = requestParams.species
+            gender = requestParams.gender
+            isMultParams = false
+            if (personality.value && (personality.value).length > 0) {
+                if (isMultParams) {
+                    api = api + '&'
+                }
+                api = api + personality.param + personality.value
+                isMultParams = true
+            }
+            if ((species.value).length > 0) {
+                if (isMultParams) {
+                    api = api + '&'
+                }
+                api = api + species.param + species.value
+                isMultParams = true
+            }
+            if ((gender.value).length > 0) {
+                if (isMultParams) {
+                    api = api + '&'
+                }
+                api = api + gender.param + gender.value
+                isMultParams = true
+            }
+            return api
+        }
         sendRequest(requestOptions)
         function sendRequest(requestOptions) {
             document.getElementById('renderList').innerHTML = "Loading..."
 
-            fetch("https://8nnamf5t5f.execute-api.us-east-2.amazonaws.com/default/villagers" + (species), requestOptions)
+            fetch(constructAPIURL(), requestOptions)
             .then(response => response.text())
             .then(result => {
                 document.getElementById('renderList').innerHTML = ""
@@ -65,18 +182,42 @@
                     table.appendChild(tr);
                 }
             })
-            .catch(error => console.log('error', error));
+            .catch(error => {
+                document.getElementById('renderList').innerHTML = "Sorry, there was an issue getting the information. Please try again."
+                console.log('error', error)
+            });
         }
-        function filter() {
-            var input = "?Species=" + document.getElementById("userInput").value;
-            species = input;
+        function updateDropddownText(text) {
+            document.getElementById('dropdownMenuButton').innerHTML = text
+        }
+        function filterPersonality(text) {
+            requestParams.personality.value = text
+            document.getElementById('dropdownMenuButtonPersonality').innerHTML = text
             sendRequest(requestOptions)
         }
-        function resetSpecies() {
-            species = ""
+        function filterSpecies(text) {
+            requestParams.species.value = text
+            document.getElementById('dropdownMenuButtonSpecies').innerHTML = text
             sendRequest(requestOptions)
         }
-        
+        function filterGender(text) {
+            requestParams.gender.value = text
+            document.getElementById('dropdownMenuButtonGender').innerHTML = text
+            sendRequest(requestOptions)
+        }
+        function showAll() {
+            requestParams.gender.value = ""
+            requestParams.species.value = ""
+            requestParams.personality.value = ""
+            document.getElementById('dropdownMenuButtonPersonality').innerHTML = "Personality"
+            document.getElementById('dropdownMenuButtonSpecies').innerHTML = "Species"
+            document.getElementById('dropdownMenuButtonGender').innerHTML = "Gender"
+
+            sendRequest(requestOptions)
+        }
         </script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>

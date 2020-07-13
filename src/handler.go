@@ -36,7 +36,7 @@ func extractPageHTML(url string) (string, error) {
 		return "", err
 	}
 
-	// Assumes that JSON is not malformed etc.
+	// Assumes that Nookipedia JSON is not malformed etc.
 	HTMLString := result["parse"].(map[string]interface{})["text"].(map[string]interface{})["*"].(string)
 
 	return HTMLString, nil
@@ -64,17 +64,8 @@ func formResponse(params map[string]string) events.APIGatewayProxyResponse {
 	if err != nil {
 		return get403Response(err)
 	}
-
-	// Filter
-	if params["Species"] != "" {
-		var filteredVillagers []Villager
-		species := params["Species"]
-		for _, villager := range villagers {
-			if villager.Species == species {
-				filteredVillagers = append(filteredVillagers, villager)
-			}
-		}
-		villagers = filteredVillagers
+	if len(params) > 0 {
+		villagers = filterVillagers(villagers, params)
 	}
 
 	villagersBytes, err := json.Marshal(villagers)
@@ -96,71 +87,3 @@ func Handler(params events.APIGatewayProxyRequest) (events.APIGatewayProxyRespon
 	response := formResponse(params.QueryStringParameters)
 	return response, nil
 }
-
-// TEST ////
-// func main() {
-// 	var m map[string]string
-// 	m = make(map[string]string)
-// 	m["Species"] = "Bird"
-// 	response := formResponse(m)
-// 	fmt.Println(response.Body)
-
-// Handler("https://nookipedia.com/w/api.php?action=parse&page=List_of_villagers&format=json")
-// fmt.Println(Handler("https://nookipedia.com/w/api.php?action=parse&section=2&origin=*&prop=text&page=List_of_villagers&format=json")) // Error with client making request
-// fmt.Println(Handler("https://nookipedia.com/w/api.php?action=parse&section=2&origin=*&page=List_of_villagers&format=json")) // Error with client making request
-// Handler("https://en.wikipedia.org/w/api.php?action=query&origin=*&list=search&srsearch=Craig%20Noone&format=jsonfm")
-// Handler("https://jsonplaceholder.typicode.com/todos/1")
-// url := "https://jsonplaceholder.typicode.com/todos"
-// fmt.Println("Hello World")
-
-// timeout := time.Duration(5 * time.Second) // Response using client
-// client := http.Client{
-// 	Timeout: timeout,
-// }
-
-// req, err := http.NewRequest("GET", url, nil)
-
-// if err != nil {
-// 	print("Error: making request failed")
-// }
-
-// resp, err := client.Do(req)
-// if err != nil {
-// 	print("Error: client making request failed")
-// }
-
-// resp, err := http.Get("https://jsonplaceholder.typicode.com/todos/1") // Single JSON response of unknown type
-// resp, err := http.Get(url) // Array JSON response of unknown type
-
-// if err != nil {
-// 	println("Error: Get request failed")
-// }
-// defer resp.Body.Close()
-// if resp.StatusCode != http.StatusOK {
-// 	println("Error: Status code not okay")
-// }
-
-// var result map[string]interface{} // Single JSON response of unknown type
-// err = json.NewDecoder(resp.Body).Decode(&result)
-// if err != nil {
-// 	println("Error: Failed to decode body of response")
-// }
-// for key, value := range result {
-// 	stringValue := fmt.Sprint(value)
-// 	println("Key: ", key, "Value: ", stringValue)
-// }
-// println("Here is the Result ", result)
-
-// var result []map[string]interface{} // Array JSON response of unknown type
-// err = json.NewDecoder(resp.Body).Decode(&result)
-
-// for _, value := range result {
-// 	for subKey, subValue := range value {
-// 		stringValue := fmt.Sprint(subValue)
-// 		println(" eachresult ", subKey, stringValue)
-// 	}
-// }
-
-// body, err := ioutil.ReadAll(resp.Body) // Plain text response
-// println("Here is the Result ", string(body))
-// }
