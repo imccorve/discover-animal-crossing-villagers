@@ -103,12 +103,17 @@
             <div id="renderList" class="table-responsive">
             </div>
           </div>
+        <nav aria-label="Next Page">
+            <ul id="renderPagination" class="pagination">
+            </ul>
+        </nav>
         <script type="text/javascript">
         var header = '<thead><tr><th scope="col">Villager Image</th><th scope="col">English Name</th><th scope="col">Japanese Name</th><th scope="col">Species</th><th scope="col">Gender</th><th scope="col">Personality</th></tr></thead>'
         var requestParams = {
             personality: { param: "Personality=",value: ""},
             species: { param: "Species=",value: ""},
             gender: { param: "Gender=",value: ""},
+            offset: 0,
         }
         var requestOptions = {
             method: 'GET',
@@ -142,16 +147,62 @@
                 api = api + gender.param + gender.value
                 isMultParams = true
             }
+            if (isMultParams) {
+                api = api + '&'
+            }
+            api = api + "limit=" + requestParams.offset.toString()
             return api
+        }
+        function nextPage() {
+            requestParams.offset = requestParams.offset + 1
+            sendRequest(requestOptions)
+        }
+        function previousPage() {
+            requestParams.offset = Math.min(requestParams.offset - 1, 0)
+            sendRequest(requestOptions)
+        }
+        function createPaginationTab(text, func) {
+            tab = document.createElement('li');
+            tab.setAttribute('class','page-item');
+            link = document.createElement('a');
+            link.setAttribute('class', 'page-link');
+            link.setAttribute('href', '#');
+            link.setAttribute('onclick', func)
+            link.innerHTML = text
+            tab.appendChild(link)
+            return tab
+        }
+        function createPagination(num, parentId) {
+            const paginationList = document.getElementById(parentId)
+            while (paginationList.firstChild) {
+                paginationList.removeChild(paginationList.lastChild)
+            }
+            previous = null
+            next = null
+            if (num > 0) {
+                previous = createPaginationTab("Previous", "previousPage();")
+            }
+            next = createPaginationTab("Next", "nextPage();")
+            if (previous) {
+                paginationList.appendChild(previous)
+            }
+            paginationList.appendChild(next)
+        }
+        function clear(item) {
+            while (item.firstChild) {
+                item.removeChild(item.lastChild)
+            }
         }
         sendRequest(requestOptions)
         function sendRequest(requestOptions) {
-            document.getElementById('renderList').innerHTML = "Loading..."
-
+            const renderList = document.getElementById('renderList')
+            clear(renderList)
+            renderList.innerHTML = "Loading..."
+            
             fetch(constructAPIURL(), requestOptions)
             .then(response => response.text())
             .then(result => {
-                document.getElementById('renderList').innerHTML = ""
+                clear(renderList)
                 var table = document.createElement('table');
                 table.setAttribute('id','table'); 
                 table.setAttribute('class','table table-bordered'); 
@@ -181,6 +232,7 @@
                     }
                     table.appendChild(tr);
                 }
+                createPagination(requestParams.offset, 'renderPagination')
             })
             .catch(error => {
                 document.getElementById('renderList').innerHTML = "Sorry, there was an issue getting the information. Please try again."
@@ -192,16 +244,19 @@
         }
         function filterPersonality(text) {
             requestParams.personality.value = text
+            requestParams.limit = 0
             document.getElementById('dropdownMenuButtonPersonality').innerHTML = text
             sendRequest(requestOptions)
         }
         function filterSpecies(text) {
             requestParams.species.value = text
+            requestParams.limit = 0
             document.getElementById('dropdownMenuButtonSpecies').innerHTML = text
             sendRequest(requestOptions)
         }
         function filterGender(text) {
             requestParams.gender.value = text
+            requestParams.limit = 0
             document.getElementById('dropdownMenuButtonGender').innerHTML = text
             sendRequest(requestOptions)
         }
@@ -209,6 +264,7 @@
             requestParams.gender.value = ""
             requestParams.species.value = ""
             requestParams.personality.value = ""
+            requestParams.limit = 0
             document.getElementById('dropdownMenuButtonPersonality').innerHTML = "Personality"
             document.getElementById('dropdownMenuButtonSpecies').innerHTML = "Species"
             document.getElementById('dropdownMenuButtonGender').innerHTML = "Gender"
