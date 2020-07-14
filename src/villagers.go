@@ -82,40 +82,6 @@ func convertToVillagers(HTMLString string) ([]Villager, error) {
 	if err != nil {
 		return nil, err
 	}
-	// htmlReader := strings.NewReader(HTMLString)
-
-	// var row []string
-	// var rows [][]string
-
-	// doc, err := goquery.NewDocumentFromReader(htmlReader)
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// doc.Find("tbody").Each(func(index int, tbodyhtml *goquery.Selection) {
-	// 	tbodyhtml.Find("tr").Each(func(indextr int, rowhtml *goquery.Selection) {
-	// 		rowhtml.Find("th").Each(func(indexth int, tableheading *goquery.Selection) {
-	// 			hasImage := false
-	// 			tableheading.Find("img").Each(func(indexth int, tablecell *goquery.Selection) {
-	// 				class, _ := tablecell.Attr("src")
-	// 				row = append(row, class)
-	// 				hasImage = true
-	// 			})
-	// 			if hasImage == false {
-	// 				tableheadingTrim := strings.TrimSpace(tableheading.Text())
-	// 				row = append(row, tableheadingTrim)
-	// 			}
-	// 		})
-	// 		rowhtml.Find("td").Each(func(indexth int, tablecell *goquery.Selection) {
-	// 			_, attrExists := tablecell.Attr("class")
-	// 			if attrExists == false {
-	// 				tablecellTrim := strings.TrimSpace(tablecell.Text())
-	// 				row = append(row, tablecellTrim)
-	// 			}
-	// 		})
-	// 		rows = append(rows, row)
-	// 		row = nil
-	// 	})
-	// })
 
 	villagers := []Villager{}
 	for i := UNECCESSARY_ROWS; i < len(rows); i++ {
